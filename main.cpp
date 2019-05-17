@@ -4,12 +4,12 @@ using namespace std;
 
 int main() {
     int option;
-    cout << "Please enter a number 1~5 for the following options.\n\n"
-            "1. Make an employee account\n"
-            "2. Make a Music Player\n"
-            "3. Make a Movie Player\n"
-            "4. Add a new product\n"
-            "5. Display collection\n" << endl;
+    cout << "Production Line Tracker\n\n"
+            "1. Add Employee Account\n"
+            "2. Add Music Player\n"
+            "3. Add Movie Player\n"
+            "4. Display Production Statistics\n"
+            "5. Exit\n" << endl;
     cin >> option;
     if (0 < option && option < 6 )
         cout << "Hello World!" << endl;
