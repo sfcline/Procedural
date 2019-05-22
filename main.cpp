@@ -1,3 +1,8 @@
+/// @file main.cpp
+/// @brief This program displays the products that are produced and the amount of each for a media player production facility.
+/// @author Stephen Cline
+/// @bug There are no known bugs at this time.
+
 #include <iostream>
 
 using namespace std;
