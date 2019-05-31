@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,7 +18,13 @@ void selectMenu(int);
 
 void newProduct();
 
-void productionView();
+void production(const string&);
+
+void productionView(const string&);
+
+string catalogMenu();
+
+void serialSearch();
 
 int main() {
     cout << "Production Line Tracker\n\n";
@@ -25,7 +33,7 @@ int main() {
         printMenu();
         cin >> option;
         selectMenu(option);
-    } while (option != 5);
+    } while (option != 6);
 
     return 0;
 }
@@ -37,14 +45,16 @@ void printMenu() {
             "2. Add Employee Account\n"
             "3. Add New Product\n"
             "4. Display Production Statistics\n"
-            "5. Exit" << endl;
+            "5. Serial Number Search\n"
+            "6. Exit" << endl;
 }
 
 /// @brief This function allows the user to select from the main menu.
+/// @param option
 void selectMenu(int option) {
     switch (option) {
         case 1:
-            cout << "Produce Items Stub\n";
+            production(catalogMenu());
             break;
         case 2:
             cout << "Add Employee Account Stub\n";
@@ -55,9 +65,12 @@ void selectMenu(int option) {
             break;
         case 4:
             cout << "\n";
-            productionView();
+            productionView(catalogMenu());
             break;
         case 5:
+            serialSearch();
+            break;
+        case 6:
             break;
         default:
             cout << "Not a valid selection\n";
@@ -66,8 +79,6 @@ void selectMenu(int option) {
 
 /// @brief This function allows the user to enter a new product into the catalog.
 void newProduct() {
-    int itemTypeChoice;
-    string itemTypeCode;
     cout << "Enter the Manufacturer\n";
     string manufacturer;
     cin >> manufacturer;
@@ -78,7 +89,13 @@ void newProduct() {
     catalog.open("catalog.txt");
     catalog << manufacturer << " " << prodName << "\n";
     catalog.close();
+}
 
+/// @brief This function allows the user to add new production logs.
+/// @param manufacturer
+void production(const string& manufacturer) {
+    int itemTypeChoice;
+    string itemTypeCode;
     do {
         cout << "Enter the item type\n";
         cout << "1. Audio\n" <<
@@ -131,34 +148,71 @@ void newProduct() {
     prodLog.close();
 }
 
-/// @brief This function grabs the catalog and displays information according to the user's choice.
-void productionView() {
-    int catalogOption;
-    ifstream catalog;
-    int catalogAmount = 0;
-    catalog.open("catalog.txt");
-    cout << "Select a Product\n";
+/// @brief This function displays production logs according to the user's choice.
+/// @param catalogOption
+void productionView(const string& catalogOption) {
     string line;
-    string catalogArray[255];
-
-    for (catalogAmount; getline(catalog, line); catalogAmount++) {
-        cout << (catalogAmount + 1) << ". " << line << "\n";
-        catalogArray[catalogAmount] = line;
-    }
-    catalog.close();
-
-    do {
-        cin >> catalogOption;
-        if (catalogAmount < catalogOption || catalogOption < 1)
-            cout << "Not a valid selection\n"; /// @todo   show menu again after invalid selection
-    } while (catalogAmount < catalogOption || catalogOption < 1);
-
     ifstream prodLog;
     prodLog.open("production.txt");
     while (getline(prodLog, line)) {
-        if (string::npos != line.find(catalogArray[catalogOption].substr(0, 3))) {
+        if (string::npos != line.find(catalogOption.substr(0, 3))) {
             cout << line << "\n";
         }
     }
 
+}
+
+/// @brief This function displays the catalog menu.
+/// @return catalog option from user input
+string catalogMenu() {
+    bool catalogMatch = false;
+    string catalogOption;
+    ifstream catalog;
+    catalog.open("catalog.txt");
+    cout << "Select a Product\n";
+    string line;
+    vector<string> catalogVec;
+
+    while (getline(catalog, line)) {
+        catalogVec.push_back(line);
+    }
+    catalog.close();
+
+    sort(catalogVec.begin(), catalogVec.end());
+
+
+    do {
+        for (const auto& x : catalogVec)
+            std::cout << x << "\n";
+        cin >> catalogOption;
+        for (auto & i : catalogVec) {
+            if (string::npos != i.find(catalogOption.substr(0, 3)))
+                catalogMatch = true;
+        }
+        if (!catalogMatch)
+            cout << "Not a valid selection\n";
+    } while (!catalogMatch);
+
+    return catalogOption;
+}
+
+void serialSearch() {
+    ifstream catalog;
+    catalog.open("catalog.txt");
+    string line;
+    string serial;
+    cout << "Enter a Serial Number\n";
+    cin >> serial;
+
+    while (getline(catalog, line)) {
+        if (string::npos != line.find(serial.substr(0, 3))) {
+            cout << line << "\n";
+            catalog.close();
+            return;
+        }
+    }
+
+    cout << "Not a valid Serial Number\n";
+
+    catalog.close();
 }
