@@ -18,11 +18,11 @@ void selectMenu(int);
 
 void newProduct();
 
-void production(const string&);
+void production(const string &, const string &);
 
-void productionView(const string&);
+void productionView(const string &);
 
-string catalogMenu();
+string catalogMenu(string &);
 
 void serialSearch();
 
@@ -52,9 +52,12 @@ void printMenu() {
 /// @brief This function allows the user to select from the main menu.
 /// @param option
 void selectMenu(int option) {
+    string itemTypeCode;
+    string catalogOption;
     switch (option) {
         case 1:
-            production(catalogMenu());
+            catalogOption = catalogMenu(itemTypeCode);
+            production(catalogOption, itemTypeCode);
             break;
         case 2:
             cout << "Add Employee Account Stub\n";
@@ -65,7 +68,8 @@ void selectMenu(int option) {
             break;
         case 4:
             cout << "\n";
-            productionView(catalogMenu());
+            catalogOption = catalogMenu(itemTypeCode);
+            productionView(catalogOption);
             break;
         case 5:
             serialSearch();
@@ -85,15 +89,6 @@ void newProduct() {
     cout << "Enter the Product Name\n";
     string prodName;
     cin >> prodName;
-    ofstream catalog;
-    catalog.open("catalog.txt");
-    catalog << manufacturer << " " << prodName << "\n";
-    catalog.close();
-}
-
-/// @brief This function allows the user to add new production logs.
-/// @param manufacturer
-void production(const string& manufacturer) {
     int itemTypeChoice;
     string itemTypeCode;
     do {
@@ -120,6 +115,15 @@ void production(const string& manufacturer) {
                 cout << "Not a valid selection\n";
         }
     } while (1 > itemTypeChoice || itemTypeChoice > 4);
+    ofstream catalog;
+    catalog.open("catalog.txt");
+    catalog << manufacturer << "," << prodName << "\n";
+    catalog.close();
+}
+
+/// @brief This function allows the user to add new production logs.
+/// @param manufacturer
+void production(const string &manufacturer, const string &itemTypeCode) {
     cout << "Enter the number of items that were produced\n";
     int numProduced;
     cin >> numProduced;
@@ -150,7 +154,7 @@ void production(const string& manufacturer) {
 
 /// @brief This function displays production logs according to the user's choice.
 /// @param catalogOption
-void productionView(const string& catalogOption) {
+void productionView(const string &catalogOption) {
     string line;
     ifstream prodLog;
     prodLog.open("production.txt");
@@ -164,11 +168,16 @@ void productionView(const string& catalogOption) {
 
 /// @brief This function displays the catalog menu.
 /// @return catalog option from user input
-string catalogMenu() {
+string catalogMenu(string &itemTypeCode) {
     bool catalogMatch = false;
     string catalogOption;
     ifstream catalog;
     catalog.open("catalog.txt");
+    if (!catalog.good()) {
+        cout << "No available products\n";
+        return "00000";
+    }
+
     cout << "Select a Product\n";
     string line;
     vector<string> catalogVec;
@@ -182,16 +191,28 @@ string catalogMenu() {
 
 
     do {
-        for (const auto& x : catalogVec)
+        for (const auto &x : catalogVec)
             std::cout << x << "\n";
         cin >> catalogOption;
-        for (auto & i : catalogVec) {
-            if (string::npos != i.find(catalogOption.substr(0, 3)))
+        for (auto &i : catalogVec) {
+            if (string::npos != i.find(catalogOption.substr(0, 3))) {
                 catalogMatch = true;
+                catalogOption = i;
+            }
         }
         if (!catalogMatch)
             cout << "Not a valid selection\n";
     } while (!catalogMatch);
+
+    if (string::npos != catalogOption.find("MM")) {
+        itemTypeCode = "MM";
+    } else if (string::npos != catalogOption.find("VI")) {
+        itemTypeCode = "VI";
+    } else if (string::npos != catalogOption.find("AM")) {
+        itemTypeCode = "AM";
+    } else if (string::npos != catalogOption.find("VM")) {
+        itemTypeCode = "VM";
+    }
 
     return catalogOption;
 }
