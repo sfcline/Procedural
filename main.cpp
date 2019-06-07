@@ -26,6 +26,12 @@ string catalogMenu(string &);
 
 void serialSearch();
 
+void accountCreation();
+
+string encrypt_string(string);
+
+string decrypt_string(string);
+
 int main() {
     cout << "Production Line Tracker\n\n";
     int option;
@@ -60,7 +66,7 @@ void selectMenu(int option) {
             production(catalogOption, itemTypeCode);
             break;
         case 2:
-            cout << "Add Employee Account Stub\n";
+            accountCreation();
             break;
         case 3:
             cout << "\n";
@@ -192,7 +198,7 @@ string catalogMenu(string &itemTypeCode) {
 
     do {
         for (const auto &x : catalogVec)
-            std::cout << x << "\n";
+            cout << x << "\n";
         cin >> catalogOption;
         for (auto &i : catalogVec) {
             if (string::npos != i.find(catalogOption.substr(0, 3))) {
@@ -217,6 +223,7 @@ string catalogMenu(string &itemTypeCode) {
     return catalogOption;
 }
 
+/// @brief This function searches for a product by serial.
 void serialSearch() {
     ifstream catalog;
     catalog.open("catalog.txt");
@@ -236,4 +243,67 @@ void serialSearch() {
     cout << "Not a valid Serial Number\n";
 
     catalog.close();
+}
+
+/// @brief This function creates a new employee account.
+void accountCreation() {
+    bool valid = false;
+
+    /// Create Username
+    cout << "Enter employee's full name\n";
+
+    string first_name;
+    cin >> first_name;
+    string last_name;
+    cin >> last_name;
+
+    string user_name;
+
+    // create user name in proper format
+    last_name[0] = tolower(last_name[0]);
+    last_name.insert(last_name.begin(), tolower(first_name[0]));
+    user_name = last_name;
+
+    /// Create password
+    cout << "Enter employee's password.\n";
+
+    string password;
+
+    while (!valid) {
+        cout << "Must contain a number and lowercase and uppercase letters.\n";
+        cin >> password;
+        if (any_of(password.begin(), password.end(), ::isdigit)
+            && any_of(password.begin(), password.end(), ::isupper)
+            && all_of(password.begin(), password.end(), ::isalnum)) {
+            valid = true;
+            cout << "User name: " + user_name + "\n"
+                      << "Password: Valid\n";
+
+        } else
+            cout << "Invalid password.\n";
+    }
+    ofstream accounts;
+    accounts.open("accounts.txt");
+    accounts << user_name << "," << encrypt_string(password) << "\n";
+    accounts.close();
+}
+
+/// @brief This function encrypts a string with recursion
+/// @param str
+string encrypt_string(string str) {
+    if (str.length() == 1) {
+        return str;
+    } else {
+        return char((int) str[0] + 3) + encrypt_string(str.substr(1, str.length() - 1));
+    }
+}
+
+/// @brief This function decrypts a string with recursion
+/// @param str
+string decrypt_string(string str) {
+    if (str.length() == 1) {
+        return str;
+    } else {
+        return char((int) str[0] - 3) + decrypt_string(str.substr(1, str.length() - 1));
+    }
 }
