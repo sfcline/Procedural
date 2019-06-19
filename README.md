@@ -30,9 +30,8 @@ Requirements:
 * Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019
 
 Instructions:
-Download Procedural.exe from 
-
-Run Procedural.exe in a directory of choice. Keep in mind it will store files in the same directory.
+* Download Procedural.exe from 
+* Run Procedural.exe in a directory of choice. Keep in mind it will store files in the same directory.
 
 ## Built With
 
