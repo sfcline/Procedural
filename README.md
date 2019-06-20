@@ -1,4 +1,4 @@
-# TODO: Finish getting started, Documentation
+# TODO: Finish Documentation
 
 # Production Line Tracker
 
@@ -6,9 +6,9 @@ This is an application is for a media player production facility that will keep 
 I made this project as an assignment for my Procedural Programming class at FGCU as a beginner to C++.<br />
 This was a semester long project that was made using a top-down approach to programming.<br />
 
-![Program](https://github.com/sfcline/Procedural/blob/master/procedural.png?raw=true)
+![Program](https://github.com/sfcline/Procedural/blob/master/Program.gif?raw=true)
 
-Features:<br />
+## Features
 * Allow a user to add new products that are able to be produced and store them in a collection.
 * The collection of products that can be produced can be displayed at any time.
 * Allow a user to track production of products, including specifying how many items of that product were created.
@@ -30,7 +30,7 @@ Requirements:
 * Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019
 
 Instructions:
-* Download Procedural.exe from 
+* <a href="https://github.com/sfcline/Procedural/releases/tag/1.0">Download Procedural.exe</a> 
 * Run Procedural.exe in a directory of choice. Keep in mind it will store files in the same directory.
 
 ## Built With
