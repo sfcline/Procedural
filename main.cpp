@@ -12,18 +12,20 @@
 
 using namespace std;
 
-/// struct for Product containing strings for manufacturer, name, and type
+/// @brief struct for Product containing strings for manufacturer, name, and type
 struct Product {
     string manufacturer;
     string name;
     string type;
 };
 
+/// @brief struct for Record containing order number and serial
 struct Record {
     int orderNumber;
     string serial;
 };
 
+/// @brief struct for Statistic containing strings for total and type
 struct Statistic {
     int total;
     string type;
