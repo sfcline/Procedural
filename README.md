@@ -6,7 +6,7 @@ This is an application is for a media player production facility that will keep 
 I made this project as an assignment for my Procedural Programming class at FGCU as a beginner to C++.<br />
 This was a semester long project that was made using a top-down approach to programming.<br />
 
-![Program](https://github.com/sfcline/Procedural/blob/master/procedural.png?raw=true)
+![Program](https://github.com/sfcline/Procedural/blob/master/Program.gif?raw=true)
 
 Features:<br />
 * Allow a user to add new products that are able to be produced and store them in a collection.
