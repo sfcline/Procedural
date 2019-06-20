@@ -1,4 +1,4 @@
-# TODO: Finish Documentation, Create a gif
+# TODO: Finish Documentation
 
 # Production Line Tracker
 
