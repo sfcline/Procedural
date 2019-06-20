@@ -1,5 +1,3 @@
-# TODO: Finish Documentation
-
 # Production Line Tracker
 
 This is an application is for a media player production facility that will keep track of what products are produced. <br />
@@ -18,11 +16,7 @@ This was a semester long project that was made using a top-down approach to prog
 
 ## Documentation
 
-Create a docs folder in your project. If using Java, generate JavaDoc in your IDE. If using C++, use Doxygen. Change repository settings (using Settings at top of page) to use GitHub Pages with your docs folder. Add a link to the javadoc/doxygen index.html file with this markdown: \[Text to appear]\(URL) <br />
-The URL will be YourGitHubUserName.github.io/YourRepositoryName/foldername/filename<br /> 
-Do not include the docs folder name in your URL. <br />
-Sample: \[JavaDoc]\(https://pv-cop.github.io/PV-README-TEMPLATE/javadoc/index.html) <br /> <br />
-[JavaDoc](https://pv-cop.github.io/PV-README-TEMPLATE/javadoc/index.html)
+[Doxygen](https://sfcline.github.io/Procedural/index.html)
 
 ## Getting Started
 
