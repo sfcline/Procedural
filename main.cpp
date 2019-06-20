@@ -80,7 +80,9 @@ int main() {
 }
 
 /// @brief This function allows the user to select from the main menu.
-/// @param option
+/// @param productLine
+/// @param productRecords
+/// @param productStats
 int selectMenu(vector<Product> &productLine, vector<Record> &productRecords, vector<Statistic> &productStats) {
     string itemTypeCode;
     int catalogOption;
@@ -166,7 +168,7 @@ void newProduct(vector<Product> &productLine) {
 }
 
 /// @brief This function allows the user to add new production logs.
-/// @param manufacturer
+/// @param catalogOption
 /// @param itemTypeCode
 /// @param productLine
 /// @param productRecord
@@ -234,8 +236,8 @@ void productionView(const string &catalogOption, const vector<Record> &productRe
 }
 
 /// @brief This function displays all production logs.
-/// @param catalogOption
 /// @param productRecords
+/// @param productLine
 void productionView(const vector<Record> &productRecords, const vector<Product> &productLine) {
     string tmp;
     for (const auto &x : productRecords) {
@@ -281,7 +283,6 @@ int catalogMenu(string &itemTypeCode, const vector<Product> &productLine) {
 }
 
 /// @brief This function overflows catalogMenu.
-/// @param itemTypeCode
 /// @param productLine
 /// @return catalog option from user input
 int catalogMenu(const vector<Product> &productLine) {
