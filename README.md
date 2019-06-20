@@ -1,4 +1,4 @@
-# TODO: Finish getting started, Documentation
+# TODO: Finish Documentation
 
 # Production Line Tracker
 
@@ -30,7 +30,7 @@ Requirements:
 * Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019
 
 Instructions:
-* Download Procedural.exe from 
+* <a href="https://github.com/sfcline/Procedural/releases/tag/1.0">Download Procedural.exe</a> 
 * Run Procedural.exe in a directory of choice. Keep in mind it will store files in the same directory.
 
 ## Built With
