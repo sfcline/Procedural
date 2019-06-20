@@ -37,7 +37,7 @@ Instructions:
 
 ## License
 
-* sfcline/Procedural is licensed under the GNU Lesser General Public License v2.1
+sfcline/Procedural is licensed under the GNU Lesser General Public License v2.1
 
 ## Acknowledgments
 
