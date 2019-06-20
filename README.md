@@ -8,7 +8,7 @@ This was a semester long project that was made using a top-down approach to prog
 
 ![Program](https://github.com/sfcline/Procedural/blob/master/Program.gif?raw=true)
 
-# Features
+## Features
 * Allow a user to add new products that are able to be produced and store them in a collection.
 * The collection of products that can be produced can be displayed at any time.
 * Allow a user to track production of products, including specifying how many items of that product were created.
